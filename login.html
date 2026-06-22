@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Teacher & Student</title>
+  <link rel="stylesheet" href="login.css">
+  
+</head>
+<body>
+  <div id="login-page">
+    <div class="login-container">
+      <img src="soulware logo 1.png" alt="SOULWARE Logo" style="display:block; margin: 0 auto 20px; width:200px; height:auto;">
+      <h1 style="font-size: 32px; margin-bottom: 30px;">Welcome to SOULWARE</h1>
+
+      <div class="login-options">
+        <button id="student-btn" style="width: 180px; padding: 15px; font-size: 18px;">Student Login</button>
+        <button id="teacher-btn" style="width: 180px; padding: 15px; font-size: 18px;">Counsellors Login</button>
+      </div>
+
+      <!-- Student Login Form -->
+      <form id="student-form" class="login-form" style="display:none;">
+        <h2 style="font-size: 28px; margin-bottom: 25px;">Student Login</h2>
+        <input type="text" placeholder="Student ID" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="password" placeholder="Password" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <button type="submit" style="padding: 16px; font-size: 20px; width: 100%; margin-bottom: 10px;">Login</button>
+        <button type="button" id="student-register-btn" style="padding: 16px; font-size: 20px; width: 100%; margin-bottom: 12px;">Register</button>
+        <p class="back-option">Go Back</p>
+      </form>
+
+      <!-- Student Registration Form -->
+      <form id="student-register-form" class="login-form" style="display:none; margin-top: 20px;">
+        <h2 style="font-size: 28px; margin-bottom: 25px;">Student Registration</h2>
+        <input type="text" placeholder="Student Name" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="email" placeholder="Email" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="password" placeholder="Password" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="Mobile Number" placeholder="Mobile Number" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="password" placeholder="Confirm Password" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="Institute" placeholder="Institute " required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;>
+        <button type="button" id="student-register-btn" style="padding: 16px; font-size: 20px; width: 100%; margin-bottom: 12px;">Register</button>
+        <p class="back-option">Go Back</p>
+      </form>
+
+      <!-- Teacher Login Form -->
+      <form id="teacher-form" class="login-form" style="display:none;">
+        <h2 style="font-size: 26px; margin-bottom: 20px;"> Login</h2>
+        <input type="text" placeholder="Teacher ID" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <input type="password" placeholder="Password" required style="padding: 14px; font-size: 18px; width: 100%; margin-bottom: 12px;">
+        <button type="submit" style="padding: 16px; font-size: 20px; width: 100%; margin-bottom: 10px;">Login</button>
+        <p class="back-option">Go Back</p>
+      </form>
+    </div>
+  </div>
+
+  <div id="main-website" style="display:none;">
+    <!-- Main website content goes here. Replace this comment with your actual main website HTML. -->
+    <h2 style="text-align:center; margin-top:40px;">Welcome to the Main Website!</h2>
+    <p style="text-align:center;">You have successfully logged in.</p>
+    <!-- Add your main website's HTML here -->
+  </div>
+
+  <script src="login.js"></script>
+  <script>
+    // Example: simple login success handler
+    document.getElementById('student-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // validate login here if needed
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('main-website').style.display = 'block';
+    });
+
+    document.getElementById('teacher-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // validate login here if needed
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('main-website').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

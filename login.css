@@ -1,0 +1,100 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  margin: 0;
+}
+
+.login-container {
+  background: white;
+  padding: 60px;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+  width: 420px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+}
+
+.login-container h1 {
+  font-size: 32px;
+  color: #135a77;
+  margin-bottom: 30px;
+}
+
+.login-options button {
+  width: 180px;
+  padding: 14px;
+  margin: 10px;
+  border: none;
+  background: linear-gradient(90deg, #135a77, #063567);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.login-options button:hover {
+  background: linear-gradient(90deg, #063567, #041f3b);
+  transform: scale(1.05);
+}
+
+.login-form {
+  display: none;
+  flex-direction: column;
+  margin-top: 25px;
+}
+
+.login-form input {
+  margin: 12px 0;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #135a77;
+  box-shadow: 0 0 8px rgba(19,90,119,0.3);
+  outline: none;
+}
+
+.login-form button {
+  padding: 14px;
+  border: none;
+  background: linear-gradient(90deg, #063567, #041f3b);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 15px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.login-form button:hover {
+  background: linear-gradient(90deg, #041f3b, #000d1a);
+  transform: scale(1.05);
+}
+
+.login-form .back-option {
+  color: #135a77;
+  cursor: pointer;
+  margin-top: 15px;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.login-form .back-option:hover {
+  color: #063567;
+}

@@ -1,0 +1,724 @@
+.dropdown-menu .dropdown-menu {
+  top: 0;
+  left: 100%;  /* appear to the right of parent */
+}
+/* Dropdown wrapper */
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 10;
+  background: #fff;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  min-width: 180px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  z-index: 1000;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background: #f5f5f5;
+  color: var(--primary, #007bff);
+}
+
+/* Show only the direct child dropdown when hovering */
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Nested dropdowns open only when their parent is hovered */
+.dropdown-menu .dropdown:hover > .dropdown-menu {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+.container {
+  max-width: 900px;   /* makes content wider */
+  margin: 0 auto;      /* centers the content */
+  padding: 20px 20px;     /* adds spacing on left and right */
+}
+.section-container {
+  max-width: 100vh;
+  margin: 0 auto;
+  padding: 200px 90px;
+}
+:root{
+  --bg: #e8ecf1;
+  --card: #33858d;
+  --text: #1a1b19;
+  --muted: #e99e6cf9;
+  --primary: #3c5ca1; /* blue */
+  --accent: #15798a;  /* teal */
+  --radius: 12px;
+  --glass: rgba(240, 245, 250, 0.18); /* more neutral glass color */
+  --glass-border: rgba(255,255,255,0.25);
+  --glass-shadow: 0 4px 20px rgba(0,0,0,0.10);
+  --glass-blur: blur(12px) saturate(180%);
+  --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.30), rgba(230,235,245,0.22));
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Reset / base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  font-size:16px;
+  background: linear-gradient(120deg, #dde8f1 0%, #f4f7fa 100%);
+  min-height: 100vh;
+}
+
+/* Utility */
+.container{max-width:1100px;margin:0 auto;padding:28px;}
+.section-title{
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--primary);
+  position: relative;
+  margin: 16px 0 40px;
+  letter-spacing: 1px;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #135a77, #06a1e0);
+  margin: 12px auto auto;
+  border-radius: 2px;
+}
+
+/* Header */
+.site-header {
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.header-inner {
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 0 40px; /* add horizontal padding for breathing space */
+}
+.logo{font-weight:700;color:var(--primary);text-decoration:none;font-size:1.15rem;transition: transform 0.3s ease;}
+.nav{display:flex;align-items:center}
+.nav-list {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* center nav links between logo and CTA */
+  gap: 40px; /* adjust spacing between nav items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  padding-bottom: 4px;
+}
+.nav-list a:hover {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+/* Special styling for Features link in header */
+.nav-list a.features-link {
+  background: rgba(60, 92, 161, 0.1); /* faint primary background */
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--primary);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.nav-list a.features-link:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.btn{border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+  box-shadow:0 6px 18px rgba(37,99,235,0.12);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: #2c4d91;
+  transform: scale(1.05);
+}
+.btn-ghost{background:transparent;color:var(--primary);border:1px solid rgba(37,99,235,0.12)}
+.header-cta{display:inline-block}
+
+/* Mobile hamburger */
+.hamburger{display:none;background:none;border:0;padding:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px}
+@media (max-width:880px){
+  .nav{position:fixed;right:0;top:64px;background:var(--card);width:260px;height:calc(100vh - 64px);transform:translateX(110%);transition:transform .25s ease;box-shadow:0 10px 30px rgba(15,23,36,0.08);padding:20px}
+  .nav.open{transform:translateX(0)}
+  .nav-list{flex-direction:column;gap:14px}
+  .hamburger{display:block}
+  .header-cta{display:none}
+}
+
+/* Hero */
+.hero {
+  background: url("wallpaper.png") no-repeat center top;
+  background-size: 60% 650px; /* adjust height as needed */
+  background-attachment: scroll;
+  padding: 56px 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  text-align: center;
+  margin-top: 80px;
+}
+.hero-inner{display:flex;gap:40px;align-items:center}
+.hero-text{flex:1}
+.hero h1{font-size:3rem;margin:0 0 12px;line-height:1.05}
+.lead{color:var(--muted);margin-bottom:18px}
+.hero-cts .btn{margin-right:12px}
+.hero-media{flex:1;display:flex;justify-content:center}
+.device-mock{background:linear-gradient(180deg,#fff,#f6fbff);padding:18px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06);max-width: 400px;}
+.device-mock img{max-width:100%;border-radius:10px;display:block}
+
+/* Features grid */
+.features .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; /* increase spacing */
+  width: 100%;
+}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+/* Glassmorphism card style */
+.card,
+.glass-card {
+  background: var(--glass);
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+  padding: 30px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.card h3,
+.glass-card h3 {
+  margin-top:0;
+  margin-bottom:8px;
+  color: var(--primary);
+  text-shadow: 0 1px 4px rgba(255,255,255,0.12);
+}
+
+/* For glass effect in sections */
+.glass-section {
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 18px;
+  padding: 36px 28px;
+  margin-bottom: 36px;
+}
+.card h3{margin-top:0;margin-bottom:8px}
+
+/* About */
+.about-inner{display:flex;gap:28px;align-items:center}
+.about-text{flex:1}
+.about-media img{max-width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+.demo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.demo-box{
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 18px;
+}
+
+/* Contact form */
+.contact-form{
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 18px;
+}
+.form-row{display:flex;gap:12px}
+.form-row input{flex:1;padding:12px;border:1px solid #e6eefb;border-radius:8px}
+textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #e6eefb;resize:vertical}
+.form-actions{text-align:right;margin-top:10px}
+
+/* Footer */
+.site-footer{
+  padding:20px 0;
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;color:var(--muted)}
+
+/* Responsive */
+@media (max-width:880px){
+  .hero-inner{flex-direction:column-reverse}
+  .grid-3{grid-template-columns:repeat(1,1fr)}
+  .about-inner{flex-direction:column}
+  .demo-grid{grid-template-columns:1fr}
+  .container{padding:18px}
+  .card, .glass-card, .glass-section, .contact-form {
+    border-radius: 14px;
+    padding: 20px;
+  }
+}
+.logo:hover {
+  transform: scale(1.4);
+}
+
+/* Breathing Exercise Styles */
+#breathing-container {
+ margin-top: 20px;
+  text-align: center;
+}
+
+.breathing-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4CAF50, #2E7D32);
+  margin: 30px auto;
+  transition: all 4s ease-in-out;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+}
+
+#breathing-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 15px;
+  color: var(--primary);
+  transition: opacity 1s ease-in-out;
+}
+
+
+/* Make breathing exercise visually match music session with more rounded corners */
+#breathing-exercise {
+  margin-left: -20px; /* small left shift */
+  border: 2px solid rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  border-radius: 24px; /* increased from 12px to 24px */
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#breathing-exercise:hover {
+  background: linear-gradient(135deg, #d9e3eb);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* Music Session Styles with more rounded corners */
+#music-session {
+  background: linear-gradient(135deg, #83bae1, #2e4373);
+  padding: 20px;
+  border-radius: 24px; /* increased from 12px to 24px */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  text-align: center;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#music-session:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+#music-session h2.section-title {
+  color: #fff;
+}
+
+#music-session p {
+  margin-bottom: 16px;
+  color: rgba(255,255,255,0.85);
+}
+
+#music-list audio {
+  width: 320px;        /* increased width */
+  height: 45px;        /* increased height for bigger controls */
+  margin: 12px auto;
+  border-radius: 10px;
+  outline: none; /* remove browser outline/glow */
+  background: transparent; /* remove white rectangular background */
+  box-shadow: none; /* remove shadow around button */
+  transition: transform 0.2s ease;
+}
+
+#music-list audio:hover {
+  transform: scale(1.05);
+}
+
+/* Wellness Tools Container - aligned and spaced */
+#wellness-tools {
+  display: flex;
+  justify-content: space-evenly; /* distribute sections evenly */
+  align-items: flex-start;       /* align top edges */
+  gap: 40px;                     /* space between sections */
+  margin: 40px auto;
+  flex-wrap: nowrap;
+  max-width: 1000px;             /* ensure full visibility */
+}
+
+/* All sections have the same dimensions */
+#breathing-exercise-wrapper,
+#music-session-wrapper,
+#video-session-wrapper {
+  flex: 0 0 250px;        /* fixed width */
+  min-height: 350px;      /* fixed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* evenly space content */
+  padding: 20px;
+  border-radius: 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* Slide breathing section slightly more to the right for alignment */
+#breathing-exercise-wrapper {
+  margin-left: 1200px; /* slide breathing section more to the right */
+}
+
+/* Center audio in music session */
+#music-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Video element styling */
+#video-session-wrapper video {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+/* Video session hover effect */
+#video-session-wrapper {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#video-session-wrapper:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* Add background colors to wellness tools sections */
+#breathing-exercise-wrapper {
+  background: linear-gradient(135deg, #d9e3eb, #f0f7fa); /* light blue gradient */
+}
+
+#music-session-wrapper {
+  background: linear-gradient(135deg, #83bae1, #2e4373); /* blue gradient */
+  color: #fff;
+}
+
+#video-session-wrapper {
+  background: linear-gradient(135deg, #29698b70, #2f93c4c7); /* warm gradient */
+  color: #fff;
+}
+
+/* Gaming Session Styles */
+#gaming-session-wrapper {
+  flex: 0 0 250px;        /* same width as other sections */
+  min-height: 350px;      /* same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 24px;    /* same rounded corners */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1); /* same shadow */
+  border: 2px solid rgba(0,0,0,0.08); /* similar border */
+  background: linear-gradient(135deg, #a6d4d8, hsl(292, 25%, 65%)); /* visually distinct gradient */
+  color: #724646;
+  
+  text-align: center;
+   
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gaming-session-wrapper:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 12px 24px #5870daee;
+}
+
+/* Digital Diary Full Width at Page Bottom */
+#digital-diary {
+  position: relative;
+  width: 2000dvh;
+  min-height: 100vh; /* ensures full screen height */
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  padding: 40px;
+  border-radius: 0; /* no border radius */
+  box-shadow: none; /* remove shadow */
+  text-align: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+#digital-diary h2 {
+  color: #1e3d6b;
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+#digital-diary p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+#digital-diary textarea {
+  width: 100%;
+  min-height: 150px;
+  border: 2px solid #90caf9;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#digital-diary textarea:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 12px rgba(30,136,229,0.4);
+  outline: none;
+}
+
+#digital-diary select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #90caf9;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+#digital-diary select:focus {
+  border-color: #1e88e5;
+  outline: none;
+}
+
+#digital-diary button {
+  margin-top: 12px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#digital-diary button:hover {
+  background: #1565c0;
+  transform: scale(1.05);
+}
+
+#digital-diary ul {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+#digital-diary li {
+  list-style: none;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: left;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Virtual Panda Styles */
+#virtual-panda {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  bottom: 100px;
+  left: 50px;
+  cursor: pointer;
+  z-index: 1002;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.panda-wave {
+  animation: wave 1s ease-in-out;
+}
+
+/* Problem & Our Approach Box */
+
+/* Problem & Our Approach Table Layout */
+.problem-approach {
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 60px 20px;
+  display: table;
+  width: 100%;
+  justify-content: center;
+}
+
+.problem-approach-box {
+  background: var(--glass-gradient);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  border: 2px solid var(--glass-border);
+  padding: 40px;
+  max-width: 1000px;
+  width: 100%;
+  display: table-row-group;
+}
+
+.problem-approach-row {
+  display: table-row;
+}
+
+.problem-approach-cell {
+  display: table-cell;
+  vertical-align: top;
+  padding: 20px;
+}
+
+.problem-approach-logo {
+  width: 200px;
+}
+
+.problem-approach-logo img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.problem-approach-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #063567;
+}
+
+.problem-approach-text p,
+.problem-approach-text ul {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+@media (max-width: 900px) {
+  .problem-approach-box {
+    display: block;
+  }
+  .problem-approach-row,
+  .problem-approach-cell {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+  .problem-approach-logo {
+    margin-bottom: 20px;
+  }
+}
+/* Glassmorphism utility class for content cards */
+.glass-card {
+  /* Already included above, but utility for direct use */
+}
+
+/* Ensure text contrast and readability on glass backgrounds */
+.card,
+.glass-card,
+.glass-section,
+.contact-form,
+.problem-approach-box {
+  color: #23272f;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.08);
+}
+
+/* For dark backgrounds on glass, use white text */
+#music-session-wrapper,
+#video-session-wrapper {
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}

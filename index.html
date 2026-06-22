@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Project / Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Chatbot widget styles */
+    #chatbot {
+      position: fixed; 
+      bottom: 80px;
+      right: 20px;
+      width: 500px;             /* even wider */
+      max-height: 650px;        /* even taller */
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+      z-index: 1000;
+    }
+    #chatbot header {
+      background: #063567;
+      color: white;
+      padding: 10px;
+      font-weight: 600;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    #chatbot .messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      font-size: 16px;        /* larger text */
+      line-height: 1.6;
+    }
+    #chatbot .input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    #chatbot input[type="text"] {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+      border-bottom-left-radius: 8px;
+    }
+    #chatbot input[type="text"]:focus {
+      outline: none;
+    }
+    #chatbot button.send-btn {
+      background: #135a77;
+      border: none;
+      color: white;
+      padding: 0 15px;
+      cursor: pointer;
+      font-size: 16px;
+      border-bottom-right-radius: 8px;
+    }
+    #chatbot button.send-btn:disabled {
+      background: #ccc;
+      cursor: default;
+    }
+    #chatbot .message {
+      margin-bottom: 18px;
+      padding: 18px 22px;        /* larger padding */
+      border-radius: 18px;
+      max-width: 98%;            /* allow wider bubbles */
+      font-size: 18px;           /* larger text */
+      line-height: 1.7;
+      clear: both;
+    }
+    #chatbot .message.user {
+      background: #3a6393;
+      color: white;
+      float: right;
+      text-align: right;
+    }
+    #chatbot .message.bot {
+      background: #f1f0f0;
+      color: #333;
+      float: left;
+      text-align: left;
+    }
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 95px;
+      height: 85px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 1001;
+      user-select: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+                     <!-- NAVBAR -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#">
+        <img src="soulware logo 1.png" alt="Soulware Logo" style="height: 200px;width: 200px; background: transparent;" />
+      </a>
+
+      <nav class="nav">
+        <ul class="nav-list" style="display:flex; justify-content:space-between; flex:1; margin: 40px;">
+         <li class="dropdown">
+  <a href="#Profile" data-key="profile">Your Profile ▾</a>
+  <ul class="dropdown-menu">
+    <li class="dropdown">
+      <a href="#profile-info" data-key="profileInfo">Profile Info </a>
+      <ul class="dropdown-menu">
+    <li class="dropdown">
+      <a href="#basic-details" data-key="basicDetails">Basic Details </a>
+      <ul class="dropdown-menu">
+        <li><a href="#name" data-key="name">Name</a></li>
+        <li><a href="#age" data-key="age">Age</a></li>
+        <li><a href="#gender" data-key="gender">Gender</a></li>
+        </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#academic-info" data-key="academicInfo">Academic Info </a>
+      <ul class="dropdown-menu">
+        <li><a href="#grades" data-key="college">College</a></li>
+        <li><a href="#attendance" data-key="attendance">Attendance</a></li>
+        <li><a href="#projects" data-key="projects">Projects</a></li>
+        <li><a href="#certificates" data-key="certificates">Certificates</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#health-stats" data-key="healthStats">Health Stats </a>
+      <ul class="dropdown-menu">
+        <li><a href="#blood group" data-key="bloodGroup">Blood group</a></li>
+        <li><a href="#Height" data-key="height">height</a></li>
+        <li><a href="Weight" data-key="weight">Weight</a></li>
+        <li><a href="#Physical Vitals" data-key="physicalVitals">Physical Vitals</a></li>
+        <li><a href="#Recovery" data-key="recovery">Recovery</a></li>
+        <li><a href="#Medication/Mindfulness Session" data-key="mindfulness">Mindfulness</a></li>
+        <li><a href="#sleep-tracking" data-key="sleepTracking">Sleep Tracking</a></li>
+        <li><a href="#Remainder" data-key="remainder">Remainder</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#university" data-key="university">University </a>
+      <ul class="dropdown-menu">
+        <li><a href="#courses" data-key="courses">Courses</a></li>
+        <li><a href="#departments" data-key="departments">Departments</a></li>
+        <li><a href="#events" data-key="events">Events</a></li>
+        <li><a href="#clubs" data-key="clubs">Clubs & Societies</a></li>
+        <li><a href="#notices" data-key="notices">Notices</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#achievements" data-key="achievements">Achievements / Wellness Streaks </a>
+      <ul class="dropdown-menu">
+        <li><a href="#badges" data-key="badges">Badges</a></li>
+        <li><a href="#certifications" data-key="certifications">Certifications</a></li>
+        <li><a href="#leaderboard" data-key="leaderboard">Leaderboard</a></li>
+        <li><a href="#milestones" data-key="milestones">Milestones</a></li>
+        <li><a href="#wellness-streaks" data-key="wellnessStreaks">Wellness Streaks</a></li>
+      </ul>
+    </li>
+  </ul>
+    </li>
+    <li class="dropdown">
+  <a href="#settings" data-key="settings">Settings</a>
+  <ul class="dropdown-menu">
+    <li class="dropdown">
+      <a href="#account" data-key="accountSettings">Account Settings</a>
+      <ul class="dropdown-menu">
+        <li><a href="#edit-profile" data-key="editProfile">Edit Profile</a></li>
+        <li><a href="#change-password" data-key="changePassword">Change Password</a></li>
+        <li><a href="#linked-devices" data-key="linkedDevices">Linked Devices</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#privacy" data-key="privacySecurity">Privacy & Security</a>
+      <ul class="dropdown-menu">
+        <li><a href="#data-privacy" data-key="dataPrivacyOptions">Data Privacy Options</a></li>
+        <li><a href="#two-factor" data-key="twoFactorAuth">Two-Factor Authentication</a></li>
+        <li><a href="#block-user" data-key="blockUser">Block / Report User</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#preferences" data-key="appPreferences">App Preferences</a>
+      <ul class="dropdown-menu">
+        <li><a href="#theme" data-key="darkLightMode">Dark/Light Mode</a></li>
+        <li><a href="#notifications" data-key="notificationSettings">Notification Settings</a></li>
+      </ul>
+    </li>
+     <li class="dropdown">
+       <a href="#support" data-key="support">Support</a>
+       <ul class="dropdown-menu">
+         <li><a href="#help-center" data-key="helpCenterMenu">Help Center</a></li>
+         <li><a href="#contact-support" data-key="contactSupport">Contact Support</a></li>
+       </ul>
+     </li>
+  </ul>
+</li>
+  </ul>
+</li>
+          <li class="dropdown">
+  <a href="#demo" data-key="demo">Demo ▾</a>
+  <ul class="dropdown-menu">
+    <li class="dropdown">
+      <a href="#chat-demo" data-key="chatDemo">Chat Demo ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="#mood-check" data-key="moodCheckDemo">Mood Check 🤖 Demo</a></li>
+        <li><a href="#timeline" data-key="moodTimelineDemo">Mood Timeline 📈 Demo</a></li>
+        <li><a href="#guided-meditation" data-key="guidedMeditationDemo">Guided Meditation 🎧 Demo</a></li>
+        <li><a href="#peer-support" data-key="peerSupportDemo">Peer Support Demo 👥</a></li>
+        <li><a href="#appointment-booking" data-key="appointmentBookingDemo">Appointment Booking 📅 Demo</a></li>
+        <li><a href="#emergency-help" data-key="emergencyQuickHelpDemo">Emergency Quick Help 🚨 Demo</a></li>
+      </ul>
+    </li>
+ 
+</ul>
+</li>
+         <li class="dropdown">
+  <a href="#book" data-key="appointment">Book Appointment ▾</a>
+  <ul class="dropdown-menu" style="padding: 16px; min-width: 260px;">
+    <li>
+      <form class="appointment-form" onsubmit="event.preventDefault(); alert('Appointment booked successfully!');">
+        <div style="margin-bottom: 10px;">
+          <input type="text" name="studentName" placeholder="Your Name" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;" data-key="yourName">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <input type="email" name="studentEmail" placeholder="Your Email" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;" data-key="yourEmail">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <select name="counselor" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+            <option value="" data-key="selectCounselor">Select Counselor</option>
+            <option value="counselor1">Amit Sengar</option>
+            <option value="counselor2">Dr. Arjun Patel</option>
+            <option value="counselor3">Dr. Navneet Kaur</option>
+            <option value="counselor4">Tasneem Jahan</option>
+          </select>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <input type="date" name="date" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <input type="time" name="time" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+        </div>
+        <div>
+          <button type="submit" style="width:100%; padding:10px; border:none; border-radius:6px; background:#063567; color:white; font-weight:bold; cursor:pointer;" data-key="bookNow">Book Now</button>
+        </div>
+      </form>
+    </li>
+    <li><a href="#history" data-key="appointmentHistory">Appointment History</a></li>
+  </ul>
+</li>
+         <li class="dropdown">
+  <a href="#Help centre" data-key="helpCenter">Help Center ▾</a>
+  <ul class="dropdown-menu" style="padding: 12px; min-width: 350px;">     
+    <li class="dropdown">
+      <a href="#" onclick="toggleFAQ('faq1')" data-key="faqQuestion1">How can I book a counseling session?</a>
+      <ul class="dropdown-menu" id="faq1" style="display:none; padding:8px; background:#f9f9f9; border-radius:6px;">
+        <li data-key="faqAnswer1">You can book an appointment via the 'Book Appointment'. Fill out the form with your details and select a counselor.</li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" onclick="toggleFAQ('faq2')" data-key="faqQuestion2">Is my data private and secure?</a>
+      <ul class="dropdown-menu" id="faq2" style="display:none; padding:8px; background:#f9f9f9; border-radius:6px;">
+        <li data-key="faqAnswer2">Yes. All your information is encrypted and kept confidential. Only authorized counselors can access your session data.</li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" onclick="toggleFAQ('faq3')" data-key="faqQuestion3">Can I track my mood over time?</a>
+      <ul class="dropdown-menu" id="faq3" style="display:none; padding:8px; background:#f9f9f9; border-radius:6px;">
+        <li data-key="faqAnswer3">Yes. Use the Mood Tracking feature to view your mood trends and patterns over days or weeks.</li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" onclick="toggleFAQ('faq4')" data-key="faqQuestion4">What if I need immediate help?</a>
+      <ul class="dropdown-menu" id="faq4" style="display:none; padding:8px; background:#f9f9f9; border-radius:6px;">
+        <li data-key="faqAnswer4">You can use the Chatbot or check the Emergency Quick Help Demo in the 'Demo' section for immediate guidance.</li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<script>
+function toggleFAQ(id){
+  // Collapse all FAQ answers under Help Centre except the one being toggled
+  const allFAQs = document.querySelectorAll('#Help\\ centre .dropdown-menu ul');
+  allFAQs.forEach(faq => {
+    if(faq.id !== id){
+      faq.style.display = 'none';
+    }
+  });
+  const el = document.getElementById(id);
+  if(el.style.display === 'none'){
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
+</script>
+         <li class="dropdown">
+  <a href="#contact" data-key="contact">Contact Us ▾</a>
+  <ul class="dropdown-menu">
+    
+    <li class="dropdown">
+      <a href="#contact-form" data-key="contactForm">Contact Form ▾</a>
+      <ul class="dropdown-menu">
+        <li>
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Form submit stub — replace with your backend.');" style="padding: 16px; min-width: 250px;">
+            <div class="form-row" style="margin-bottom: 12px;">
+              <input type="text" name="name" placeholder="Your name" required data-key="yourName">
+            </div>
+            <div class="form-row" style="margin-bottom: 12px;">
+              <input type="email" name="email" placeholder="Email address" required data-key="yourEmail">
+            </div>
+            <div class="form-row" style="margin-bottom: 12px;">
+              <input type="text" name="course" placeholder="Institute" data-key="institute">
+            </div>
+            <div class="form-row" style="margin-bottom: 12px;">
+              <input type="number" name="age" placeholder="Age" data-key="age">
+            </div>
+            <div class="form-row" style="margin-bottom: 12px;">
+              <input type="text" name="issue" placeholder="Your issue" data-key="yourIssue">
+            </div>
+            <div class="form-row" style="margin-bottom: 12px;">
+              <select name="counselor" required>
+                <option value="" data-key="selectCounselor">Select Counselor</option>
+                <option value="counselor1">Amit Sengar</option>
+                <option value="counselor2">Dr. Arjun Patel</option>
+                <option value="counselor3">Dr. Navneet Kaur</option>
+                <option value="counselor4">Tasneem Jahan</option>
+              </select>
+            </div>
+            <div class="form-row" style="margin-bottom: 12px;">
+              <textarea name="message" rows="5" placeholder="Message / Collaboration idea" data-key="message"></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit" data-key="sendMessage">Send Message</button>
+            </div>
+          </form>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#counselors" data-key="counselors">Counselors ▾</a>
+      <ul class="dropdown-menu">
+        <li class="dropdown">
+          <a href="#" data-key="counselor1">Amit Sengar ▾</a>
+          <ul class="dropdown-menu" style="padding:12px; max-width:250px;">
+            <li><img src="Amit Sengar.jpeg" alt="Amit Sengar" style="width:100%; border-radius:8px;"></li>
+            <li><p><strong data-key="specialization">Specialization:</strong> <span data-key="counselor1Spec">Stress & Anxiety Management, Mindfulness</span></p></li>
+            <li><p><strong data-key="contact">Contact:</strong> +91-7506310404</p></li>
+            <li><p><strong data-key="email">Email:</strong>sengar.amit@gmail.com</p></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" data-key="counselor2">Dr. Anukriti Sharma ▾</a>
+          <ul class="dropdown-menu" style="padding:12px; max-width:250px;">
+            <li><img src="Anukrity.jpeg" alt="Dr.Anukriti Sharma" style="width:100%; border-radius:8px;"></li>
+            <li><p><strong data-key="specialization">Specialization:</strong> <span data-key="counselor2Spec">Career Counseling, Positive Psychology</span></p></li>
+            <li><p><strong data-key="contact">Contact:</strong> +91-9123456780</p></li>
+            <li><p><strong data-key="email">Email:</strong>anukriti123@gmail.com</Sharma>.com</p></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" data-key="counselor3">Dr. Navneet Kaur▾</a>
+          <ul class="dropdown-menu" style="padding:12px; max-width:250px;">
+            <li><img src="navneet.jpeg" alt="Dr. Kavita Rao" style="width:100%; border-radius:8px;"></li>
+            <li><p><strong data-key="specialization">Specialization:</strong> <span data-key="counselor3Spec">Adolescent Psychology, CBT</span></p></li>
+            <li><p><strong data-key="contact">Contact:</strong> +91-9826258544</p></li>
+            <li><p><strong data-key="email">Email:</strong> Dr.NavneetKaur13@gmail.com</p></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" data-key="counselor4">Tasneem jahan ▾</a>
+          <ul class="dropdown-menu" style="padding:12px; max-width:250px;">
+            <li><img src="Tasneem.jpeg" alt="Tasneem Jahan" style="width:100%; border-radius:8px;"></li>
+            <li><p><strong data-key="specialization">Specialization:</strong> <span data-key="counselor4Spec">Resilience & Coping, Mindfulness</span></p></li>
+            <li><p><strong data-key="contact">Contact:</strong> +91-8989191400</p></li>
+            <li><p><strong data-key="email">Email:</strong> tasneem.jahan12@gmail.com</p></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#socials" data-key="socialLinks">Social Links ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="https://twitter.com" target="_blank" data-key="twitter">🐦 Twitter</a></li>
+        <li><a href="https://linkedin.com" target="_blank" data-key="linkedin">🔗 LinkedIn</a></li>
+        <li><a href="https://instagram.com" target="_blank" data-key="instagram">📸 Instagram</a></li>
+        <li><a href="https://facebook.com" target="_blank" data-key="facebook">📘 Facebook</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+         <li class="dropdown">
+  <a href="#language">Language ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="#" onclick="changeLanguage('en')">English</a></li>
+    <li><a href="#" onclick="changeLanguage('hi')">हिंदी</a></li>
+    <li><a href="#" onclick="changeLanguage('bn')">বাংলা</a></li>
+  </ul>
+         </li>
+          
+        </ul>
+      </nav>
+  <!--
+      <li class="dropdown">
+  <a href="#features">Features </a>
+  <ul class="dropdown-menu">
+    <li><a href="#ai">AI Chatbot</a></li>
+   <li><a href="#counselling">Counselling</a></li>
+  </ul>
+</li>
+
+-->
+      <button class="btn btn-primary header-cta">Overview</button>
+
+      <button class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO --> 
+    <section class="hero">
+      <div class="section-container">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1 style="color:white;" data-key="heroTitle" >Digital Mental Health Support for Students</h1>
+           
+           
+           <!-- <p class="lead mb-4" data-key="heroText">
+              AI-powered, secure with full privacy platform that tracks wellbeing, offers instant help, and connects students with counselors.
+            </p>
+            -->
+            <div class="hero-cts">
+              <a class="btn btn-primary btn-lg me-3" href="#demo" data-key="tryDemo">Try Demo</a>
+              <a class="btn btn-ghost btn-lg" href="#features" data-key="learnMore">Learn More</a>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <!-- Replace this image with a screenshot from your video or a relevant illustration -->
+            <div class="device-mock">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features container">
+      <div class="section-container">
+        <h2 class="section-title" data-key="featuresTitle">Key Features</h2>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-key="feature1Title">AI Chatbot🤖</h3>
+            <p data-key="feature1Text">24×7 conversational assistant for immediate emotional and mental support.</p>
+          </article>
+          <article class="card">
+            <h3 data-key="feature2Title">Mood Tracking</h3>
+            <p data-key="feature2Text">Quick self-assessments and visualized mood history to spot trends early.</p>
+          </article>
+          <article class="card">
+            <h3 data-key="feature3Title">Secure Counselling</h3>
+            <p data-key="feature3Text">Encrypted chat & video sessions with certified counselors on demand.</p>
+          </article>
+          <article class="card">
+            <h3 data-key="feature4Title">Peer Support</h3>
+            <p data-key="feature4Text">Anonymous forums and moderated groups to reduce stigma and build community.</p>
+          </article>
+          <article class="card">
+            <h3 data-key="feature5Title">Gamified Wellness</h3>
+            <p data-key="feature5Text">Short activities, streaks, and reminders that encourage consistency.</p>
+          </article>
+          <article class="card">
+            <h3 data-key="feature6Title">Campus Integration</h3>
+            <p data-key="feature6Text">Syncs with academic calendars for context-aware suggestions and alerts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / PROBLEM & OUR APPROACH -->
+    <section id="about" class="problem-approach">
+      <div class="problem-approach-box">
+        <div class="problem-approach-row">
+          <div class="problem-approach-cell problem-approach-logo">
+            <img src="cute.jpeg" alt="Illustration">
+          </div>
+          <div class="problem-approach-cell problem-approach-text">
+            <h2 data-key="problemTitle">Problem & Our Approach</h2>
+            <p data-key="problemText">Students face stress, anxiety, and academic pressure with limited access to timely support. Our solution combines AI triage, confidential counseling, and evidence-based wellness activities to deliver help where and when it's needed.</p>
+            <ul>
+              <li data-key="problemPoint1">On-demand human counseling when needed</li>
+              <li data-key="problemPoint2">Privacy-first data handling</li>
+              <li data-key="problemPoint3">Personalized user dashboard and insights</li>
+              <li data-key="problemPoint4">Data analytics and reporting for institutional use</li>
+              <li data-key="problemPoint5">Integrated with academic and campus life services</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO / CTA -->
+    <section id="demo" class="demo container">
+      <div class="section-container">
+        <h2 class="section-title" data-key="demoTitle">Prototype Demo</h2>
+        <div class="demo-grid">
+          <div class="demo-box">
+            <h3 data-key="demoBox1Title">Interactive Chat</h3>
+            <p data-key="demoBox1Text">Simulate a quick chat flow where the bot asks mood-related questions and suggests a breathing exercise.</p>
+          </div>
+          <div class="demo-box">
+            <h3 data-key="demoBox2Title">Peer to Peer Support</h3>
+            <p data-key="demoBox2Text"><h4>•One to one Interaction</h4>Connects individuals for personal conversations,allowing deeper understanding and emotional relief</p>
+          </div> 
+        </div>
+      </div>
+    </section>
+
+    <!-- WELLNESS TOOLS (Breathing + Music) -->
+    <section id="wellness-tools" class="container" style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; margin: 40px 0;">
+
+      <!-- BREATHING EXERCISE -->
+      <div id="breathing-exercise-wrapper">
+        <section id="breathing-exercise">
+          <div class="section-container" style="text-align:center;">
+            <h2 class="section-title" data-key="breathingTitle">Breathing Exercise</h2>
+            <p data-key="breathingText">Follow this guided breathing exercise to relax and reduce stress.</p>
+            <button id="start-breathing" class="btn btn-primary" data-key="startBreathing">Start Breathing</button>
+            <div id="breathing-container"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- CALM MUSIC SESSION -->
+      <div id="music-session-wrapper">
+        <section id="music-session">
+          <div class="section-container" style="text-align:center;">
+            <h2 class="section-title" data-key="musicTitle">Calm Music Session</h2>
+            <p data-key="musicText">Listen to soothing music to relax and calm your mind.</p>
+            <div id="music-list">
+              <audio controls>
+                <source src="Relaxing Warm.mp4" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <audio controls>
+                <source src="Nature Bird __ Bambo Flute__ Morning relaxing Music __ © Copyright Free No Copyright __ Flute Sujan(MP3_160K).mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <audio controls>
+                <source src="OONCHI OONCHI DEEWAREIN_ Yaariyan 2 _ Meezaan_ Anaswara _ Arijit_ Manan _ Radhika_ Vinay _ Bhushan K(MP3_320K).mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- VIDEO SESSION -->
+      <div id="video-session-wrapper">
+        <section id="video-session">
+          <div class="section-container" style="text-align:center;">
+            <h2 class="section-title" style="color:white;" data-key="videoTitle">Relaxing Video</h2>
+            <p data-key="videoText">Watch a calming video to relax your mind.</p>
+            <div id="video-player-container" style="text-align:center;">
+              <video id="relax-video" controls style="width: 250px; height: 350px; border-radius: 24px; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
+                <source src="SSYouTube.online_Focus On Yourself Not Others 🌟 A Buddhist Guide to Finding Inner Peace_1080p.mp4" type="video/mp4">
+              </video>
+
+              <div id="video-list" style="margin-top:15px; display:flex; flex-direction:column; gap:8px;">
+                <button class="video-btn" data-src="HealFlute.mp4">Video 1</button>
+                <button class="video-btn" data-src="relaxing_video2.mp4">Video 2</button>
+                <button class="video-btn" data-src="relaxing_video3.mp4">Video 3</button>
+              </div>
+            </div>
+            <script>
+              const videoPlayer = document.getElementById('relax-video');
+              const videoButtons = document.querySelectorAll('.video-btn');
+
+              videoButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                  const src = btn.getAttribute('data-src');
+                  videoPlayer.src = src;
+                  videoPlayer.play();
+                });
+              });
+            </script>
+          </div>
+        </section>
+      </div>
+
+      <!-- GAMING SESSION -->
+      <div id="gaming-session-wrapper">
+        <section id="gaming-session">
+          <div class="section-container" style="text-align:center;">
+            <h2 class="section-title" style="color:white;" data-key="gameTitle">Relaxing Game</h2>
+            <p data-key="gameText">Select a game to play and relax your mind.</p>
+            
+            <!-- Game selection buttons -->
+            <div style="margin-bottom:15px;">
+              <button class="btn btn-primary" id="paddle-game-btn">Paddle Game</button>
+              <button class="btn btn-primary" id="funny-game-btn">Funny Game</button>
+            </div>
+            
+            <!-- Game canvases -->
+            <canvas id="mini-game" width="250" height="350" style="border-radius:12px; background:#f0f0f0;"></canvas>
+            <canvas id="funny-game" width="250" height="350" style="border-radius:12px; background:#f0f0f0; display:none;"></canvas>
+            
+            <p>Score: <span id="score">0</span></p>
+          </div>
+        </section>
+      </div>
+
+      <script src="game.js"></script>
+      <script src="funny-game.js"></script>
+
+      <script>
+        const miniGameCanvas = document.getElementById('mini-game');
+        const funnyGameCanvas = document.getElementById('funny-game');
+        const scoreDisplay = document.getElementById('score');
+
+        let currentGame = "paddle"; // default
+
+        function showPaddleGame() {
+          miniGameCanvas.style.display = 'block';
+          funnyGameCanvas.style.display = 'none';
+          scoreDisplay.innerText = 0;
+          currentGame = "paddle";
+          if(typeof switchGame === "function") switchGame("paddle");
+        }
+
+        function showFunnyGame() {
+          miniGameCanvas.style.display = 'none';
+          funnyGameCanvas.style.display = 'block';
+          scoreDisplay.innerText = 0;
+          currentGame = "funny";
+          if(typeof initFunnyGame === "function") initFunnyGame();
+        }
+
+        document.getElementById('paddle-game-btn').addEventListener('click', showPaddleGame);
+        document.getElementById('funny-game-btn').addEventListener('click', showFunnyGame);
+
+        // Initialize default game on page load
+        window.addEventListener('load', showPaddleGame);
+      </script>
+
+    </section>
+
+    <!-- DIGITAL DIARY - Full View -->
+    <section id="digital-diary" style="width:100vw; min-height:100vh; margin:0; padding:40px; background: linear-gradient(135deg, #e3f2fd, #bbdefb); box-sizing:border-box;">
+      <div style="width:100%; max-width:none;">
+        <h2 class="section-title" data-key="diaryTitle" style="text-align:center; font-size:36px;">My Digital Diary ✍️</h2>
+        <p data-key="diaryText" style="text-align:center; font-size:18px;">Write down your thoughts and feelings privately. Your diary is safe here.</p>
+        
+        <textarea id="diary-entry" rows="10" style="width:100%; padding:16px; border-radius:12px; font-size:16px; border:1px solid #ccc; margin-top:20px;" placeholder="How are you feeling today?"></textarea>
+        
+        <div style="margin:20px 0; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <label for="mood" data-key="selectMood" style="font-weight:600;">Select Mood:</label>
+          <select id="mood" style="padding:8px 12px; border-radius:8px; border:1px solid #ccc;">
+            <option value="happy">😊 Happy</option>
+            <option value="sad">😟 Sad</option>
+            <option value="angry">😡 Angry</option>
+            <option value="anxious">😨 Anxious</option>
+            <option value="tired">😴 Tired</option>
+          </select>
+          <button onclick="saveDiary()" class="btn btn-primary" data-key="saveEntry" style="padding:12px 24px;">Save Entry</button>
+        </div>
+        
+        <h3 style="margin-top:30px; text-align:center;" data-key="previousEntries">Previous Entries 📖</h3>
+        <ul id="diary-list" style="list-style:none; padding-left:0; display:flex; flex-direction:column; gap:12px;"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Soulware. <span data-key="allRights">All rights reserved.</span></p>
+      <div class="socials">
+        <a href="#" aria-label="Twitter" data-key="twitter">Twitter</a>
+        <a href="#" aria-label="LinkedIn" data-key="linkedin">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small JS for year and simple mobile menu toggle
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const ham = document.querySelector('.hamburger');
+    const nav = document.querySelector('.nav');
+    ham && ham.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      ham.classList.toggle('open');
+    });
+  </script>
+
+  <div id="chatbot">
+    <header>Chatbot</header>
+    <div class="messages" id="chatbot-messages"></div>
+    <div class="input-area">
+      <input type="text" id="chatbot-input" placeholder="Type your message..." autocomplete="off" />
+      <button class="send-btn" id="chatbot-send" disabled>Send</button>
+    </div>
+  </div>
+  <div id="chatbot-toggle" aria-label="Toggle Chatbot" role="button" tabindex="0">
+    <img src="Chatbot Logo.jpeg" alt="Chatbot Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+  </div>
+
+  <script>
+    (function(){
+      const toggleBtn = document.getElementById('chatbot-toggle');
+      const chatbot = document.getElementById('chatbot');
+      const messagesContainer = document.getElementById('chatbot-messages');
+      const input = document.getElementById('chatbot-input');
+      const sendBtn = document.getElementById('chatbot-send');
+
+      function appendMessage(text, sender) {
+        const msg = document.createElement('div');
+        msg.classList.add('message', sender);
+        msg.textContent = text;
+        messagesContainer.appendChild(msg);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        if(chatbot.style.display === 'flex'){
+          chatbot.style.display = 'none';
+        } else {
+          chatbot.style.display = 'flex';
+          input.focus();
+        }
+      });
+
+      input.addEventListener('input', () => {
+        sendBtn.disabled = input.value.trim() === '';
+      });
+
+      sendBtn.addEventListener('click', () => {
+        const userMsg = input.value.trim();
+        if(userMsg === '') return;
+        appendMessage(userMsg, 'user');
+        input.value = '';
+        sendBtn.disabled = true;
+
+        // Simulate bot reply after short delay
+        setTimeout(() => {
+          let reply = "I'm here to listen! Can you tell me more?";
+
+          const lower = userMsg.toLowerCase();
+          if(lower.includes("stressed")) {
+            reply = "I hear you’re feeling stressed. Try a 2-minute breathing exercise in the Wellness Tools section. 🌿";
+          } 
+          else if(lower.includes("anxiety")) {
+            reply = "Anxiety can be tough. Listening to calm flute music in the Music Session may help you relax. 🎶";
+          } 
+          else if(lower.includes("sleep")) {
+            reply = "Good sleep is key! Avoid screens 30 mins before bed and try our Relaxing Video to wind down. 😴";
+          } 
+          else if(lower.includes("sad") || lower.includes("depressed")) {
+            reply = "I’m sorry you feel this way.  You’re not alone — you can also reach out to one of our counselors in the Contact Us section.";
+          }
+          else if(lower.includes("angry") || lower.includes("anger")) {
+            reply = "It’s natural to feel angry sometimes. Take a short break, try deep breathing, or step outside for fresh air. 🌬️";
+          }
+          else if(lower.includes("happy") || lower.includes("joy")) {
+            reply = "That’s wonderful! 🎉 Keep celebrating the good moments and share positivity with friends!";
+          }
+          else if(lower.includes("lonely") || lower.includes("alone")) {
+            reply = "Loneliness can be hard. 💜 Try connecting with peers in the Peer Support section or reach out to a counselor.";
+          }
+          else if(lower.includes("focus") || lower.includes("concentrate")) {
+            reply = "To improve focus, try the Pomodoro technique: 25 mins work, 5 mins break. You can also use our relaxing background music. 🎧";
+          }
+          else if(lower.includes("motivation") || lower.includes("inspire")) {
+            reply = "Remember: progress is progress, no matter how small. 🌟 You are stronger than you think!";
+          }
+          else if(lower.includes("fear") || lower.includes("scared")) {
+            reply = "It’s okay to feel fear. Try grounding yourself: look around and name 5 things you see, 4 things you can touch, 3 things you hear, 2 things you smell, and 1 thing you taste. 🧘";
+          }
+          else if(lower.includes("confused") || lower.includes("lost")) {
+            reply = "Feeling confused? Break tasks into smaller steps, write them down, and tackle one at a time. ✍️ Small steps lead to clarity.";
+          }
+          else if(lower.includes("samosa") || lower.includes("Samosa")) 
+            reply = "It’s okay to eat Samosa. but u don't try to eat on regulary basis.";
+         else if(lower.includes("angels") || lower.includes("hope")) {
+            reply = "Hold on to hope 🌈. Even the darkest nights give way to the sunrise. Keep moving forward — brighter days are ahead.";
+          }
+          else if(lower.includes("panic") || lower.includes("panic attack")) {
+            reply = "During panic, try slow breathing: inhale for 4 seconds, hold for 4, exhale for 6. Repeat a few times. 🌬️";
+          }
+          else if(lower.includes("tired") || lower.includes("exhausted")) {
+            reply = "Your body needs rest. Take a short nap, hydrate, and stretch a little. 💤 Even 10 minutes can refresh your mind.";
+          }
+          else if(lower.includes("confidence") || lower.includes("self esteem")) {
+            reply = "You’ve achieved more than you give yourself credit for. 💪 Remember one past success and let it remind you of your strength.";
+          }
+          else if(lower.includes("bored") || lower.includes("nothing to do")) {
+            reply = "Bored? Try a quick mindfulness game: close your eyes, take 3 deep breaths, then open them and notice something new around you. 🎲";
+          }
+          else if(lower.includes("mid sem") || lower.includes("study")) {
+            reply = "Exams can be stressful! 📚 Use short study sprints (25 mins) and reward yourself with a break. You got this!";
+          }
+          else if(lower.includes("friend") || lower.includes("relationship")) {
+            reply = "Relationships matter. 💞 If you feel low, reach out to a friend or write your thoughts in a journal — it can help release emotions.";
+          }
+          else if(lower.includes("overthink") || lower.includes("overthinking")) {
+            reply = "Overthinking can be draining. 🧠 Try writing down your thoughts, then pick only 1-2 you can act on today. The rest can wait.";
+          }
+          else if(lower.includes("time") || lower.includes("manage time")) {
+            reply = "Time management tip ⏳: Use a simple 3-3-3 rule — spend 3 hours on important tasks, 3 smaller tasks, and 3 breaks to recharge.";
+          }
+          else if(lower.includes("confidence boost") || lower.includes("self love")) {
+            reply = "Stand tall, breathe deep, and say one positive thing about yourself. 💖 Self-love builds confidence step by step.";
+          }
+          else if(lower.includes("future") || lower.includes("career")) {
+            reply = "Worried about the future? 🌟 Focus on learning one new skill every week — small growth today creates big opportunities tomorrow.";
+          }
+          else if(lower.includes("diet") || lower.includes("food")) {
+            reply = "Healthy eating fuels a healthy mind. 🥗 Try drinking more water, eating fruits, and avoiding heavy junk food when stressed.";
+          }
+          else if(lower.includes("exercise") || lower.includes("workout")) {
+            reply = "Movement boosts mood! 💪 Even a 15-minute walk or some stretching can release stress and increase focus.";
+          }
+          else if(lower.includes("music") || lower.includes("song")) {
+            reply = "Music heals 🎶. Play your favorite track or try our Calm Music Session for instant relaxation.";
+          }
+          else if(lower.includes("meditation") || lower.includes("mindfulness")) {
+            reply = "Take 5 minutes to sit quietly, close your eyes, and focus on your breathing. 🧘 Mindfulness brings peace.";
+          }
+          else if(lower.includes("gratitude") || lower.includes("thanks")) {
+            reply = "Gratitude practice 🌼: Write down 3 things you’re thankful for today. It helps shift focus to positivity.";
+          }else if(lower.includes("suicide") || lower.includes("Suicide")) {
+            reply = "please don't think like that,we can provide some counseller on our website,contact them , they will help you .";
+          }
+
+          // --- New Custom Commands ---
+
+          // 💫 Motivation & Positive Affirmations
+          else if(lower.includes("motivation") || lower.includes("motivational") || lower.includes("quote") || lower.includes("inspire") || lower.includes("affirmation")) {
+            const quotes = [
+              "💪 'Believe you can and you're halfway there.' – Theodore Roosevelt",
+              "🌞 'Every day may not be good, but there’s something good in every day.'",
+              "🔥 'Push yourself because no one else is going to do it for you.'",
+              "🌈 'Your only limit is your mind — keep going, you’re doing great!'",
+              "💖 'You are enough, just as you are. Keep growing, keep glowing!'",
+              "✨ 'Small progress is still progress. Stay consistent and kind to yourself.'",
+              "🚀 'Dream big, stay focused, and make it happen!'"
+            ];
+            reply = quotes[Math.floor(Math.random() * quotes.length)];
+          }
+
+          // 🎭 Jokes / Fun Replies
+          else if(lower.includes("joke") || lower.includes("funny")) {
+            const jokes = [
+              "Why do programmers prefer dark mode? Because light attracts bugs🤣!",
+              "😄 Why did the computer go to therapy? It had a hard drive!",
+              "🤖 I told my laptop a joke, but it didn’t get it — must be a hardware issue!",
+              " Why don’t robots ever panic? Because they have nerves of steel!"
+            ];
+            reply = jokes[Math.floor(Math.random() * jokes.length)];
+          }
+
+          // 🎯 Focus and Concentration Tips
+          else if(lower.includes("focus") || lower.includes("concentrate")) {
+            reply = "To boost focus, try the 25-minute Pomodoro technique ⏳. Work deeply for 25 minutes, then take a 5-minute break — it really helps!";
+          }
+          else if(lower.includes("distraction") || lower.includes("procrastinate")) {
+            reply = "Distractions happen! Try keeping your phone away, and make a small to-do list with just 3 main goals for today. 💪";
+          }
+
+          // 💞 Relationship and Friendship Support
+          else if(lower.includes("relationship") || lower.includes("love")) {
+            reply = "Love can be beautiful 💖 but also challenging. Communication and honesty are key — always express what you feel calmly and clearly.";
+          }
+          else if(lower.includes("friend") || lower.includes("friendship")) {
+            reply = "Friends are like emotional Wi-Fi — sometimes they disconnect, but when they’re near, everything feels stronger! 📶 Stay connected to people who uplift you.";
+          }
+          else if(lower.includes("breakup") || lower.includes("heartbroken")) {
+            reply = "Breakups hurt 💔, but they also teach us resilience. Focus on self-care, rediscover hobbies, and remember — healing takes time, and that's okay.";
+          }
+
+          appendMessage(reply, 'bot');
+        }, 800);
+      });
+
+      // Allow pressing Enter to send message
+      input.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' && !sendBtn.disabled){
+          e.preventDefault();
+          sendBtn.click();
+        }
+      });
+    })();
+  </script>
+<script>
+  function saveDiary(){
+    const entry = document.getElementById('diary-entry').value.trim();
+    const mood = document.getElementById('mood').value;
+    if(entry === '') {
+      alert("Please write something in your diary.");
+      return;
+    }
+    const date = new Date().toLocaleString();
+    const diaryItem = {date, mood, entry};
+    
+    // Save to local storage
+    let diary = JSON.parse(localStorage.getItem("diary")) || [];
+    diary.push(diaryItem);
+    localStorage.setItem("diary", JSON.stringify(diary));
+    
+    alert("Diary entry saved successfully!");
+    document.getElementById('diary-entry').value = '';
+    loadDiary();
+  }
+
+  function loadDiary(){
+    const diaryList = document.getElementById('diary-list');
+    diaryList.innerHTML = '';
+    let diary = JSON.parse(localStorage.getItem("diary")) || [];
+    diary.forEach(d => {
+      let li = document.createElement("li");
+      li.style.marginBottom = "10px";
+      li.style.padding = "10px";
+      li.style.background = "#f9f9f9";
+      li.style.borderRadius = "8px";
+      li.textContent = `[${d.date}] (${d.mood}) - Anonymous Entry`;
+      li.style.cursor = "pointer";
+      li.addEventListener("click", () => {
+        if(li.textContent.includes("Anonymous Entry")) {
+          li.textContent = `[${d.date}] (${d.mood}) - ${d.entry}`;
+        } else {
+          li.textContent = `[${d.date}] (${d.mood}) - Anonymous Entry`;
+        }
+      });
+      diaryList.appendChild(li);
+    });
+  }
+
+  window.addEventListener('load', loadDiary);
+</script>
+  <!-- Animated Virtual Panda -->
+  <img id="virtual-panda" src="Adobe Express - file.png" alt="Virtual Panda">
+
+  <style>
+  #virtual-panda {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    bottom: 100px;
+    left: 50px;
+    cursor: pointer;
+    z-index: 1002;
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+  }
+  @keyframes wave {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    50% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+    100% { transform: rotate(0deg); }
+  }
+  .panda-wave {
+    animation: wave 1s ease-in-out;
+  }
+  </style>
+
+  <script>
+    const panda = document.getElementById('virtual-panda');
+
+    // Random movement function
+    function movePanda() {
+      const maxX = window.innerWidth - panda.offsetWidth;
+      const maxY = window.innerHeight - panda.offsetHeight;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      panda.style.left = randomX + "px";
+      panda.style.top = randomY + "px";
+    }
+
+    // Random action function (only jump, wave, spin)
+    function pandaAction() {
+      const actions = ["jump", "wave", "spin"];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+
+      if(action === "jump") {
+        panda.style.transform = "translateY(-50px) scale(1.1)";
+        setTimeout(() => panda.style.transform = "translateY(0) scale(1)", 500);
+      } else if(action === "wave") {
+        panda.classList.add("panda-wave");
+        setTimeout(() => panda.classList.remove("panda-wave"), 1000);
+      } else if(action === "spin") {
+        panda.style.transform = "rotate(360deg)";
+        setTimeout(() => panda.style.transform = "rotate(0deg)", 1000);
+      }
+    }
+
+    // Click interaction removed (no message)
+    panda.addEventListener('click', () => {
+      panda.style.transform = "scale(1.4)";
+      setTimeout(() => panda.style.transform = "scale(1)", 500);
+    });
+
+    // Run panda behaviors randomly
+    setInterval(() => {
+      movePanda();
+      pandaAction();
+    }, Math.random() * 4000 + 2000);
+  </script>
+</body>
+<script>
+const translations = {
+  en: {
+    heroTitle: "Digital Mental Health Support for Students",
+    heroText: "AI-powered, secure with full privacy platform that tracks wellbeing, offers instant help, and connects students with counselors.",
+    tryDemo: "Try Demo",
+    learnMore: "Learn More"
+  },
+  hi: {
+    heroTitle: "छात्रों के लिए डिजिटल मानसिक स्वास्थ्य सहायता",
+    heroText: "एआई-समर्थित, सुरक्षित और गोपनीयता युक्त प्लेटफ़ॉर्म जो कल्याण को ट्रैक करता है, तुरंत मदद प्रदान करता है और छात्रों को काउंसलर्स से जोड़ता है।",
+    tryDemo: "डेमो आज़माएं",
+    learnMore: "और जानें"
+  },
+  bn: {
+    heroTitle: "শিক্ষার্থীদের জন্য ডিজিটাল মানসিক স্বাস্থ্য সহায়তা",
+    heroText: "এআই-চালিত, নিরাপদ এবং গোপনীয়তা রক্ষাকারী প্ল্যাটফর্ম যা সুস্থতা ট্র্যাক করে, তাত্ক্ষণিক সহায়তা প্রদান করে এবং শিক্ষার্থীদের কাউন্সেলরের সাথে সংযুক্ত করে।",
+    tryDemo: "ডেমো চেষ্টা করুন",
+    learnMore: "আরও জানুন"
+  }
+};
+
+function changeLanguage(lang) {
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
+</script>
+<script src="breathing.js"></script>
+</html>
